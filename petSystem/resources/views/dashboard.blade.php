@@ -1,4 +1,17 @@
 <x-app-layout>
+    <style>
+        .dashboard-shell {
+            position: relative;
+            overflow: hidden;
+            min-height: calc(100vh - 89px);
+            background:
+                radial-gradient(circle at top right, rgba(129, 140, 248, .38), transparent 30%),
+                linear-gradient(135deg, #e0e7ff 0%, #dbeafe 48%, #fef3c7 100%);
+        }
+        .dashboard-pet-pattern { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+        .dashboard-pet-pattern span { position: absolute; opacity: .13; font-size: 5rem; }
+        .dashboard-content { position: relative; z-index: 1; }
+    </style>
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <div>
@@ -9,8 +22,17 @@
         </div>
     </x-slot>
 
-    <div class="py-8 sm:py-12">
-        <div class="max-w-7xl mx-auto space-y-8 px-4 sm:px-6 lg:px-8">
+    <div class="dashboard-shell py-8 sm:py-12">
+        <div class="dashboard-pet-pattern" aria-hidden="true">
+            <span style="top: 5%; left: 3%; transform: rotate(-20deg);">🐾</span>
+            <span style="top: 14%; right: 4%; transform: rotate(10deg);">🐶</span>
+            <span style="top: 48%; left: 2%; transform: rotate(-8deg);">🐱</span>
+            <span style="top: 58%; right: 5%; transform: rotate(22deg);">🐾</span>
+            <span style="bottom: 4%; left: 12%; transform: rotate(-14deg);">🐰</span>
+            <span style="bottom: 8%; right: 19%; transform: rotate(18deg);">🐾</span>
+        </div>
+
+        <div class="dashboard-content max-w-7xl mx-auto space-y-8 px-4 sm:px-6 lg:px-8">
             <section class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
                 <article class="rounded-xl border border-blue-100 bg-white p-6 shadow-sm dark:border-blue-900/50 dark:bg-gray-800">
                     <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Registered Pets</p>
