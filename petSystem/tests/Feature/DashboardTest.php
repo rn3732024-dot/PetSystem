@@ -27,13 +27,13 @@ class DashboardTest extends TestCase
         $response->assertSeeText('Muning');
     }
 
-    public function test_non_admins_cannot_access_the_dashboard(): void
+    public function test_non_admins_are_redirected_away_from_the_dashboard(): void
     {
         $user = User::factory()->create(['is_admin' => false]);
 
         $this->actingAs($user)
             ->get(route('dashboard'))
-            ->assertForbidden();
+            ->assertRedirect(route('profile.edit'));
     }
 
     public function test_an_admin_can_add_a_pet_from_the_dashboard_form(): void
