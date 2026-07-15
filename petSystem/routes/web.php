@@ -9,11 +9,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', DashboardController::class)
-    ->middleware(['auth', 'verified', 'admin'])
+    ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
 Route::post('/pets', [DashboardController::class, 'store'])
-    ->middleware(['auth', 'verified', 'admin'])
+    ->middleware(['auth', 'verified'])
     ->name('pets.store');
 
 Route::middleware('auth')->group(function () {
