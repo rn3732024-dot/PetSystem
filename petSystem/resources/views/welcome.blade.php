@@ -33,7 +33,7 @@
         <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
             <a href="{{ url('/') }}" class="text-xl font-bold text-indigo-700">Pet System</a>
             @auth
-                <a href="{{ auth()->user()->is_admin ? route('dashboard') : route('profile.edit') }}" style="background-color: #4f46e5; color: #ffffff;" class="rounded-lg px-4 py-2 text-sm font-semibold hover:bg-indigo-500">My Account</a>
+                <a href="{{ route('dashboard') }}" style="background-color: #4f46e5; color: #ffffff;" class="rounded-lg px-4 py-2 text-sm font-semibold hover:bg-indigo-500">My Account</a>
             @else
                 <a href="{{ route('login') }}" style="background-color: #4f46e5; color: #ffffff;" class="rounded-lg px-5 py-2.5 text-sm font-semibold shadow-sm hover:bg-indigo-500">Log In</a>
             @endauth
@@ -49,7 +49,7 @@
 
                 <div class="mt-8 flex flex-wrap gap-4">
                     @auth
-                        <a href="{{ auth()->user()->is_admin ? route('dashboard') : route('profile.edit') }}" style="background-color: #4f46e5; color: #ffffff;" class="rounded-lg px-6 py-3 text-base font-semibold shadow-sm hover:bg-indigo-500">Continue</a>
+                        <a href="{{ route('dashboard') }}" style="background-color: #4f46e5; color: #ffffff;" class="rounded-lg px-6 py-3 text-base font-semibold shadow-sm hover:bg-indigo-500">Continue</a>
                     @else
                         <a href="{{ route('login') }}" style="background-color: #4f46e5; color: #ffffff;" class="rounded-lg px-6 py-3 text-base font-semibold shadow-sm hover:bg-indigo-500">Log In to Dashboard</a>
                         @if (Route::has('register'))

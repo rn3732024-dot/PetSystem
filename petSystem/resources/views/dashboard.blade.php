@@ -18,7 +18,7 @@
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">Pet Records Dashboard....</h2>
                 <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Admin-only overview of shelter records</p>
             </div>
-            <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-200">Administrator</span>
+            <a href="{{ route('profile.edit') }}" class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700 transition hover:bg-indigo-200 dark:bg-indigo-900/50 dark:text-indigo-200 dark:hover:bg-indigo-900">My Profile</a>
         </div>
     </x-slot>
 

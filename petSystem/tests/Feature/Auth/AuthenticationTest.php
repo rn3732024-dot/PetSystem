@@ -17,7 +17,7 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_regular_users_are_redirected_to_their_profile_after_login(): void
+    public function test_regular_users_are_redirected_to_the_dashboard_after_login(): void
     {
         $user = User::factory()->create();
 
@@ -27,7 +27,7 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('profile.edit', absolute: false));
+        $response->assertRedirect(route('dashboard', absolute: false));
     }
 
     public function test_admins_are_redirected_to_the_dashboard_after_login(): void

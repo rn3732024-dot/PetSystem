@@ -11,14 +11,14 @@ class DashboardTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_an_admin_can_see_current_pet_dashboard_totals(): void
+    public function test_an_authenticated_user_can_see_current_pet_dashboard_totals(): void
     {
-        $admin = User::factory()->create(['is_admin' => true]);
+        $user = User::factory()->create(['is_admin' => false]);
 
         Pet::create(['pet_id' => 'PET-001', 'name' => 'Bantay', 'species' => 'Dog', 'status' => 'available']);
         Pet::create(['pet_id' => 'PET-002', 'name' => 'Muning', 'species' => 'Cat', 'status' => 'adopted']);
 
-        $response = $this->actingAs($admin)->get(route('dashboard'));
+        $response = $this->actingAs($user)->get(route('dashboard'));
 
         $response->assertOk();
         $response->assertSeeText('Total Registered Pets');
@@ -27,20 +27,21 @@ class DashboardTest extends TestCase
         $response->assertSeeText('Muning');
     }
 
-    public function test_non_admins_are_redirected_away_from_the_dashboard(): void
+    public function test_dashboard_includes_a_profile_link(): void
     {
         $user = User::factory()->create(['is_admin' => false]);
 
         $this->actingAs($user)
             ->get(route('dashboard'))
-            ->assertRedirect(route('profile.edit'));
+            ->assertOk()
+            ->assertSee(route('profile.edit'), false);
     }
 
-    public function test_an_admin_can_add_a_pet_from_the_dashboard_form(): void
+    public function test_an_authenticated_user_can_add_a_pet_from_the_dashboard_form(): void
     {
-        $admin = User::factory()->create(['is_admin' => true]);
+        $user = User::factory()->create(['is_admin' => false]);
 
-        $response = $this->actingAs($admin)->post(route('pets.store'), [
+        $response = $this->actingAs($user)->post(route('pets.store'), [
             'pet_id' => 'PET-003',
             'name' => 'Snowy',
             'species' => 'Rabbit',
