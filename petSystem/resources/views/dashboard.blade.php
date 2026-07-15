@@ -122,6 +122,7 @@
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Species</th>
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Status</th>
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Added Date &amp; Time</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
@@ -137,10 +138,20 @@
                                     <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-600 dark:text-gray-300">{{ $pet->species }}</td>
                                     <td class="whitespace-nowrap px-6 py-4"><span class="inline-flex rounded-full px-2.5 py-1 text-xs font-semibold {{ $statusClasses }}">{{ ucfirst($pet->status) }}</span></td>
                                     <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-600 dark:text-gray-300">{{ $pet->created_at->format('M j, Y, g:i A') }}</td>
+                                    <td class="whitespace-nowrap px-6 py-4">
+                                        <div class="flex items-center gap-3 text-sm font-semibold">
+                                            <a href="{{ route('pets.edit', $pet) }}" class="text-indigo-600 transition hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">Edit</a>
+                                            <form method="POST" action="{{ route('pets.destroy', $pet) }}" onsubmit="return confirm('Delete this pet record?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 transition hover:text-red-800 dark:text-red-400 dark:hover:text-red-300">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="px-6 py-12 text-center text-sm text-gray-500 dark:text-gray-400">No pet records have been added yet.</td>
+                                    <td colspan="6" class="px-6 py-12 text-center text-sm text-gray-500 dark:text-gray-400">No pet records have been added yet.</td>
                                 </tr>
                             @endforelse
                         </tbody>
